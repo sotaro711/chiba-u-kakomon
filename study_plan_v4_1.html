@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>千葉大学院 情報科学コース 勉強計画 v5</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f0f0f;
+    --bg2: #161616;
+    --bg3: #1e1e1e;
+    --bg4: #242424;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #e8e8e2;
+    --text2: #999990;
+    --text3: #666660;
+    --red: #e05050;
+    --red-bg: #1e1010;
+    --red-border: #3a1818;
+    --orange: #d4804a;
+    --orange-bg: #1e1508;
+    --orange-border: #3a2810;
+    --yellow: #c8a030;
+    --yellow-bg: #1c1808;
+    --yellow-border: #382e10;
+    --teal: #3aaa80;
+    --teal-bg: #0a1e16;
+    --teal-border: #143a28;
+    --blue: #5090d0;
+    --blue-bg: #0a1828;
+    --blue-border: #143060;
+    --purple: #9080e0;
+    --purple-bg: #180e2e;
+    --purple-border: #301a58;
+    --green: #60b050;
+    --green-bg: #0c1e08;
+    --green-border: #183010;
+    --gray: #888882;
+    --gray-bg: #1a1a1a;
+    --gray-border: #2e2e2e;
+  }
+
+  body { font-family: 'Noto Sans JP', sans-serif; background: var(--bg); color: var(--text); padding: 2.5rem 1.5rem; line-height: 1.7; font-size: 14px; }
+  .container { max-width: 900px; margin: 0 auto; }
+
+  .header { margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid var(--border2); }
+  .header h1 { font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: 0.02em; }
+  .header .meta { font-size: 12px; color: var(--text3); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+  .version-badge { display: inline-block; font-size: 10px; font-family: 'JetBrains Mono', monospace; background: var(--teal-bg); border: 0.5px solid var(--teal-border); color: var(--teal); padding: 2px 8px; border-radius: 4px; margin-left: 10px; vertical-align: middle; }
+
+  .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 8px; margin-bottom: 2rem; }
+  .info-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 8px; padding: 10px 14px; }
+  .info-label { font-size: 10px; color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; font-family: 'JetBrains Mono', monospace; }
+  .info-value { font-size: 12px; color: var(--text); font-weight: 500; }
+  .info-card.highlight { border-color: var(--red-border); background: var(--red-bg); }
+  .info-card.highlight .info-value { color: var(--red); }
+
+  .section-title { font-size: 11px; font-weight: 500; color: var(--text3); letter-spacing: 0.1em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; margin-bottom: 12px; margin-top: 2.5rem; display: flex; align-items: center; gap: 10px; }
+  .section-title::after { content: ''; flex: 1; height: 0.5px; background: var(--border); }
+
+  .change-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1rem; }
+  .change-card { border-radius: 8px; padding: 10px 14px; font-size: 12px; }
+  .change-before { background: var(--bg3); border: 0.5px solid var(--border); }
+  .change-after { background: var(--teal-bg); border: 0.5px solid var(--teal-border); }
+  .change-label { font-size: 10px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .change-before .change-label { color: var(--text3); }
+  .change-after .change-label { color: var(--teal); }
+  .change-item { color: var(--text2); padding: 2px 0; display: flex; gap: 6px; align-items: flex-start; }
+  .change-after .change-item { color: var(--text); }
+  .change-item::before { content: '–'; color: var(--text3); flex-shrink: 0; }
+  .change-after .change-item::before { content: '+'; color: var(--teal); }
+
+  .priority-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 1.5rem; }
+  .pri-card { border-radius: 8px; padding: 12px 14px; }
+  .pri-high { background: var(--red-bg); border: 0.5px solid var(--red-border); }
+  .pri-mid { background: var(--orange-bg); border: 0.5px solid var(--orange-border); }
+  .pri-low { background: var(--gray-bg); border: 0.5px solid var(--gray-border); }
+  .pri-label { font-size: 10px; font-weight: 500; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .pri-high .pri-label { color: var(--red); }
+  .pri-mid .pri-label { color: var(--orange); }
+  .pri-low .pri-label { color: var(--gray); }
+  .pri-item { font-size: 12px; color: var(--text2); padding: 2px 0; display: flex; align-items: center; gap: 6px; }
+  .pri-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .d-red { background: var(--red); }
+  .d-orange { background: var(--orange); }
+  .d-gray { background: var(--gray); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 1.5rem; }
+  th { text-align: left; padding: 7px 10px; color: var(--text3); font-weight: 500; border-bottom: 0.5px solid var(--border2); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.06em; }
+  td { padding: 7px 10px; color: var(--text2); border-bottom: 0.5px solid var(--border); }
+  tr:last-child td { border-bottom: none; }
+  .tag-new { display: inline-block; font-size: 9px; font-family: 'JetBrains Mono', monospace; background: var(--teal-bg); border: 0.5px solid var(--teal-border); color: var(--teal); padding: 1px 5px; border-radius: 3px; margin-left: 4px; }
+  .tag-up { display: inline-block; font-size: 9px; font-family: 'JetBrains Mono', monospace; background: var(--orange-bg); border: 0.5px solid var(--orange-border); color: var(--orange); padding: 1px 5px; border-radius: 3px; margin-left: 4px; }
+  .tag-down { display: inline-block; font-size: 9px; font-family: 'JetBrains Mono', monospace; background: var(--gray-bg); border: 0.5px solid var(--gray-border); color: var(--gray); padding: 1px 5px; border-radius: 3px; margin-left: 4px; }
+  td.pri-high-text { color: var(--red); font-weight: 500; }
+  td.pri-mid-text { color: var(--orange); }
+  td.pri-low-text { color: var(--gray); }
+
+  .phase { background: var(--bg2); border: 0.5px solid var(--border); border-radius: 10px; padding: 1.25rem; margin-bottom: 10px; }
+  .phase-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 1rem; }
+  .badge { font-size: 11px; font-weight: 500; font-family: 'JetBrains Mono', monospace; padding: 3px 10px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+  .b-purple { background: var(--purple-bg); color: var(--purple); border: 0.5px solid var(--purple-border); }
+  .b-teal { background: var(--teal-bg); color: var(--teal); border: 0.5px solid var(--teal-border); }
+  .b-coral { background: var(--red-bg); color: var(--red); border: 0.5px solid var(--red-border); }
+  .b-amber { background: var(--yellow-bg); color: var(--yellow); border: 0.5px solid var(--yellow-border); }
+  .b-gray { background: var(--gray-bg); color: var(--gray); border: 0.5px solid var(--gray-border); }
+  .b-blue { background: var(--blue-bg); color: var(--blue); border: 0.5px solid var(--blue-border); }
+  .phase-title { font-size: 14px; font-weight: 700; color: var(--text); }
+  .phase-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+  .week-row { display: flex; gap: 14px; padding: 9px 0; border-bottom: 0.5px solid var(--border); align-items: flex-start; }
+  .week-row:last-child { border-bottom: none; }
+  .week-label { font-size: 11px; font-weight: 500; color: var(--text3); min-width: 70px; padding-top: 3px; font-family: 'JetBrains Mono', monospace; }
+  .week-content { flex: 1; }
+  .week-detail { font-size: 12px; color: var(--text3); margin-top: 5px; line-height: 1.7; }
+
+  .book-tag { display: inline-flex; align-items: center; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin: 2px 3px 2px 0; font-weight: 500; }
+  .tag-purple { background: var(--purple-bg); color: var(--purple); border: 0.5px solid var(--purple-border); }
+  .tag-teal { background: var(--teal-bg); color: var(--teal); border: 0.5px solid var(--teal-border); }
+  .tag-coral { background: var(--red-bg); color: var(--red); border: 0.5px solid var(--red-border); }
+  .tag-amber { background: var(--yellow-bg); color: var(--yellow); border: 0.5px solid var(--yellow-border); }
+  .tag-gray { background: var(--gray-bg); color: var(--gray); border: 0.5px solid var(--gray-border); }
+  .tag-blue { background: var(--blue-bg); color: var(--blue); border: 0.5px solid var(--blue-border); }
+  .tag-green { background: var(--green-bg); color: var(--green); border: 0.5px solid var(--green-border); }
+  .tag-orange { background: var(--orange-bg); color: var(--orange); border: 0.5px solid var(--orange-border); }
+  .round-tag { display: inline-block; font-size: 9px; font-family: 'JetBrains Mono', monospace; padding: 1px 5px; border-radius: 3px; margin-left: 4px; }
+  .r1 { background: var(--blue-bg); color: var(--blue); }
+  .r2 { background: var(--orange-bg); color: var(--orange); }
+  .rdone { background: var(--green-bg); color: var(--green); }
+
+  .time-box { background: var(--bg); border-radius: 6px; padding: 10px 14px; margin-top: 10px; border: 0.5px solid var(--border); }
+  .time-title { font-size: 10px; font-weight: 500; color: var(--text3); margin-bottom: 8px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.06em; }
+  .time-row-d { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+  .time-bar-bg { flex: 1; height: 4px; background: var(--bg3); border-radius: 2px; }
+  .time-bar { height: 4px; border-radius: 2px; }
+  .time-label { font-size: 11px; color: var(--text2); min-width: 200px; }
+  .time-val { font-size: 11px; color: var(--text3); min-width: 28px; text-align: right; font-family: 'JetBrains Mono', monospace; }
+
+  .tip { border-left: 2px solid var(--blue); padding: 8px 12px; background: var(--blue-bg); margin-top: 10px; font-size: 12px; color: var(--blue); border-radius: 0 6px 6px 0; }
+  .tip-warn { border-left: 2px solid var(--orange); padding: 8px 12px; background: var(--orange-bg); margin-top: 8px; font-size: 12px; color: var(--orange); border-radius: 0 6px 6px 0; }
+  .tip-danger { border-left: 2px solid var(--red); padding: 8px 12px; background: var(--red-bg); margin-top: 8px; font-size: 12px; color: var(--red); border-radius: 0 6px 6px 0; }
+
+  .exam-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 1rem; }
+  .exam-card { background: var(--bg3); border: 0.5px solid var(--border); border-radius: 6px; padding: 8px 12px; font-size: 11px; }
+  .exam-year { font-family: 'JetBrains Mono', monospace; color: var(--text3); font-size: 10px; margin-bottom: 3px; }
+  .exam-status { color: var(--text2); }
+
+  .checklist { list-style: none; }
+  .checklist li { font-size: 12px; color: var(--text2); padding: 5px 0; display: flex; align-items: center; gap: 8px; border-bottom: 0.5px solid var(--border); }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before { content: '☐'; color: var(--text3); font-size: 13px; flex-shrink: 0; }
+
+  .warn { background: var(--yellow-bg); border: 0.5px solid var(--yellow-border); border-radius: 6px; padding: 8px 12px; font-size: 11px; color: var(--yellow); margin-top: 8px; }
+
+  .schedule-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text3); white-space: nowrap; }
+  .schedule-table td:last-child { color: var(--text2); }
+  .schedule-table tr.milestone td { color: var(--red); }
+  .schedule-table tr.milestone td:first-child { color: var(--red); }
+
+  .freq-row { display: flex; align-items: center; gap: 10px; padding: 5px 0; border-bottom: 0.5px solid var(--border); font-size: 12px; }
+  .freq-row:last-child { border-bottom: none; }
+  .freq-name { min-width: 200px; color: var(--text2); }
+  .freq-dots { display: flex; gap: 4px; }
+  .dot-fill { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); }
+  .dot-empty { width: 10px; height: 10px; border-radius: 50%; background: var(--bg4); border: 0.5px solid var(--border2); }
+  .freq-note { font-size: 11px; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
+
+  section { margin-bottom: 2.5rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>千葉大学大学院 融合理工学府 情報科学コース 受験勉強計画<span class="version-badge">v5.4</span></h1>
+    <div class="meta">更新：2026年5月7日 ／ 2027年度入試募集要項の日程に合わせて全面更新</div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card"><div class="info-label">受験コース</div><div class="info-value">情報科学コース</div></div>
+    <div class="info-card"><div class="info-label">口頭試問</div><div class="info-value">7月18日（土）10:00〜</div></div>
+    <div class="info-card highlight"><div class="info-label">学力検査 本番</div><div class="info-value">8月6日（木）10:00〜12:00</div></div>
+    <div class="info-card"><div class="info-label">出願受付</div><div class="info-value">6月16日〜18日（必着）</div></div>
+    <div class="info-card"><div class="info-label">検定料払込</div><div class="info-value">6/1〜6/18（30,000円）</div></div>
+    <div class="info-card"><div class="info-label">合格発表</div><div class="info-value">8月31日（月）14時</div></div>
+  </div>
+
+  <!-- v4→v5 変更点 -->
+  <div class="section-title">v4からの主な変更点（9年分傾向分析を反映）</div>
+  <div class="change-grid">
+    <div class="change-card change-before">
+      <div class="change-label">v4の課題</div>
+      <div class="change-item">「8年分」表記だが実際は2017〜2025の9年分</div>
+      <div class="change-item">フーリエ解析を「不要に近い」と誤分類（2024年に出題あり）</div>
+      <div class="change-item">O記法を「補完」に分類（実際は4回/9年で重要）</div>
+      <div class="change-item">アルゴリズムが「ソート・BFS/DFS」のみで近年傾向に対応不足</div>
+      <div class="change-item">データ構造（特にスタック）が独立テーマとして扱われていない</div>
+      <div class="change-item">過去問演習リストに2024年が抜けている</div>
+      <div class="change-item">代数系（群・体・原始元）の対策が「線形代数」内に埋もれている</div>
+      <div class="change-item">疑似コード読解の対策が含まれていない</div>
+    </div>
+    <div class="change-card change-after">
+      <div class="change-label">v5の修正内容</div>
+      <div class="change-item">「9年分（2017〜2025）」に表記統一、頻度ドットも9個に修正</div>
+      <div class="change-item">フーリエ変換を「補完」に格上げ・1周は確実に行う</div>
+      <div class="change-item">O記法を「重要」に格上げ、アルゴリズムと一体で学習</div>
+      <div class="change-item">アルゴリズムにDP・メモ化・計算幾何・文字列照合を追加</div>
+      <div class="change-item">データ構造（スタック中心）を独立した重要テーマとして配置</div>
+      <div class="change-item">過去問演習に2024年を追加。2024・2025を最優先で2回演習</div>
+      <div class="change-item">代数系（群・体・原始元）を独立項目として明記</div>
+      <div class="change-item">C言語＋疑似コード両方の読解練習を追加</div>
+      <div class="change-item">トライアル年を2023→2022に変更（2023は特殊構成のため）</div>
+      <div class="change-item">サブネット計算を最頻出項目として強調</div>
+      <div class="change-item"><strong>[v5.1]</strong> 各参考書の必要範囲精査により、Phase2を3週→2週に・Phase3を2週→1週に圧縮</div>
+      <div class="change-item"><strong>[v5.1]</strong> 過去問本格演習を6/2→<strong>5/19に2週間前倒し</strong>。直近3年を2回演習可能に</div>
+      <div class="change-item"><strong>[v5.2]</strong> 各科目の細部漏れを補強：HTTPS/TLS/Cookie・同値関係・対偶証明・再帰呼び出し回数</div>
+      <div class="change-item"><strong>[v5.2]</strong> <strong>「解析系」を独立項目として新設</strong>（部分積分・テーラー・偏微分・2重積分）</div>
+      <div class="change-item"><strong>[v5.2]</strong> 論理回路にD-FFタイミング・ドントケア・同期型カウンタ設計を追加</div>
+      <div class="change-item"><strong>[v5.2]</strong> オートマトンに受理集合の空/無限判定・集合演算・等価性判定を追加</div>
+      <div class="change-item"><strong>[v5.3]</strong> 競プロ参考書（必修30セクション）を <strong>5/2〜5/21に1日3セクション×2周</strong>で組み込み</div>
+      <div class="change-item"><strong>[v5.3]</strong> 毎日固定枠を「30分のC言語写経」から<strong>「1.5〜2時間：競プロ実装＋過去問写経＋動作トレース」に拡大</strong></div>
+      <div class="change-item"><strong>[v5.4]</strong> 2027年度入試募集要項の日程に全面合わせ：学力検査 8/5→<strong>8/6（木）</strong>、口頭試問 7/19→<strong>7/18（土）</strong>、出願 6/17-19→<strong>6/16-18</strong>、合格発表 9/3→<strong>8/31</strong></div>
+      <div class="change-item"><strong>[v5.4]</strong> 「志望指導教員への事前連絡」「TOEIC/TOEFL有効期限確認（2024/6〜2026/5末）」を最重要タスクとして追加</div>
+      <div class="change-item"><strong>[v5.4]</strong> 工学系コースは <strong>TOEFL-iBTオンライン版（Home Edition）不可</strong> を明記</div>
+    </div>
+  </div>
+
+  <!-- 出題頻度（9年分） -->
+  <div class="section-title">出題頻度（9年分：2017〜2025）</div>
+  <div class="phase">
+    <div class="freq-row"><span class="freq-name">C言語/疑似コード読解・実装</span><div class="freq-dots"><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span></div><span class="freq-note">9/9　毎年確定</span></div>
+    <div class="freq-row"><span class="freq-name">論理回路（真理値表・カルノー図・FF）</span><div class="freq-dots"><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span></div><span class="freq-note">8/9　ほぼ毎年（2022除く）</span></div>
+    <div class="freq-row"><span class="freq-name">証明問題（数学）</span><div class="freq-dots"><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span></div><span class="freq-note">9/9　毎年確定</span></div>
+    <div class="freq-row"><span class="freq-name">確率・統計（ベイズ・期待値・検定）</span><div class="freq-dots"><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span></div><span class="freq-note">6/9　高頻度</span></div>
+    <div class="freq-row"><span class="freq-name">データ構造（スタック・キュー・木・ヒープ）</span><div class="freq-dots"><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-empty"></span></div><span class="freq-note">6/9　高頻度（特にスタック）</span></div>
+    <div class="freq-row"><span class="freq-name">ネットワーク（OSI・IP・ARP・サブネット）</span><div class="freq-dots"><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-fill"></span></div><span class="freq-note">5/9　高頻度</span></div>
+    <div class="freq-row"><span class="freq-name">オートマトン（DFA/NFA・ミーリー機械）</span><div class="freq-dots"><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-fill"></span></div><span class="freq-note">4/9　高頻度</span></div>
+    <div class="freq-row"><span class="freq-name">計算量（O記法）</span><div class="freq-dots"><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-fill"></span></div><span class="freq-note">4/9　近年必出（v5で重要に格上げ）</span></div>
+    <div class="freq-row"><span class="freq-name">ソート（選択・挿入・バブル・ヒープ）</span><div class="freq-dots"><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-fill"></span></div><span class="freq-note">4/9　頻出</span></div>
+    <div class="freq-row"><span class="freq-name">線形代数・代数系（群・体・GF(2)・rank）</span><div class="freq-dots"><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span></div><span class="freq-note">3/9　中頻度</span></div>
+    <div class="freq-row"><span class="freq-name">再帰・動的計画法（メモ化）</span><div class="freq-dots"><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-empty"></span></div><span class="freq-note">2/9　近年（2024）出題</span></div>
+    <div class="freq-row"><span class="freq-name">計算幾何・文字列照合</span><div class="freq-dots"><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-fill"></span></div><span class="freq-note">2/9　近年（2023,2025）出題</span></div>
+    <div class="freq-row"><span class="freq-name">グラフ理論（平面グラフ・木）</span><div class="freq-dots"><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span></div><span class="freq-note">2/9　補完</span></div>
+    <div class="freq-row"><span class="freq-name">フーリエ解析 <span class="tag-up">v5格上げ</span></span><div class="freq-dots"><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-empty"></span></div><span class="freq-note">1/9　2024出題（補完で1周）</span></div>
+    <div class="freq-row"><span class="freq-name">微分方程式（ODE）</span><div class="freq-dots"><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span></div><span class="freq-note">1/9　1周のみ</span></div>
+    <div class="freq-row"><span class="freq-name">数値表現（補数・浮動小数点）</span><div class="freq-dots"><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-empty"></span><span class="dot-fill"></span><span class="dot-empty"></span><span class="dot-empty"></span></div><span class="freq-note">1/9　2023出題（最低1日）</span></div>
+    <div class="freq-note" style="margin-top:8px; padding-top:8px; border-top: 0.5px solid var(--border);">ドットは左から 2017→2025 の順</div>
+  </div>
+
+  <!-- 優先度マップ（v5） -->
+  <div class="section-title">優先度マップ（9年分過去問より改訂）</div>
+  <div class="priority-row">
+    <div class="pri-card pri-high">
+      <div class="pri-label">最重要 — 毎回確定</div>
+      <div class="pri-item"><span class="pri-dot d-red"></span>C言語＋疑似コード読解</div>
+      <div class="pri-item"><span class="pri-dot d-red"></span>論理回路（カルノー図・NAND・JK/D-FF）</div>
+      <div class="pri-item"><span class="pri-dot d-red"></span>データ構造（スタック・キュー・木）<span class="tag-new">v5新</span></div>
+      <div class="pri-item"><span class="pri-dot d-red"></span>確率・統計（ベイズ・期待値・検定）</div>
+      <div class="pri-item"><span class="pri-dot d-red"></span>証明問題（帰納法・同値関係・組合せ論的）</div>
+      <div class="pri-item"><span class="pri-dot d-red"></span>離散数学（集合・写像・関係・順序集合）</div>
+    </div>
+    <div class="pri-card pri-mid">
+      <div class="pri-label">重要 — 高頻度</div>
+      <div class="pri-item"><span class="pri-dot d-orange"></span>ネットワーク（OSI・IP・ARP・CSMA/CD・<strong>HTTPS/TLS</strong>）</div>
+      <div class="pri-item"><span class="pri-dot d-orange"></span>オートマトン（NFA→DFA・ミーリー・<strong>集合演算/等価性</strong>）</div>
+      <div class="pri-item"><span class="pri-dot d-orange"></span>アルゴリズム（ソート・DP・幾何・文字列・<strong>再帰回数</strong>）</div>
+      <div class="pri-item"><span class="pri-dot d-orange"></span>計算量（O記法）<span class="tag-up">v5格上げ</span></div>
+      <div class="pri-item"><span class="pri-dot d-orange"></span>代数系（群・体・GF(2)・rank・原始元）</div>
+      <div class="pri-item"><span class="pri-dot d-orange"></span>解析系（部分積分・偏微分・FT・極座標）<span class="tag-new">v5.2新</span></div>
+      <div class="pri-item"><span class="pri-dot d-orange"></span>グラフ理論（平面グラフ・木・証明）</div>
+    </div>
+    <div class="pri-card pri-low">
+      <div class="pri-label">補完 — 1周で押さえる</div>
+      <div class="pri-item"><span class="pri-dot d-gray"></span>微分方程式（1・2階ODE）1周のみ</div>
+      <div class="pri-item"><span class="pri-dot d-gray"></span>アーキテクチャ（CPI・キャッシュ・分岐予測）</div>
+      <div class="pri-item"><span class="pri-dot d-gray"></span>数値表現（補数・IEEE 754）</div>
+      <div class="pri-item"><span class="pri-dot d-gray"></span>整数論（合同方程式・拡張ユークリッド）</div>
+      <div class="pri-item"><span class="pri-dot d-gray"></span>信号処理（PCM・通信路容量・予測符号化）</div>
+    </div>
+  </div>
+
+  <!-- 参考書リスト（v5） -->
+  <div class="section-title">科目・参考書リスト（v5改訂）</div>
+  <table>
+    <tr><th>優先度</th><th>科目</th><th>参考書・対策方法</th></tr>
+    <tr><td class="pri-high-text">最重要</td><td>C言語＋疑似コード <span class="tag-up">拡張</span></td><td>①過去問大問3を写経（2週間）→ ②穴埋め自力で →③基本情報技術者試験 午後C言語問題。<strong>2023,2025は疑似コード形式</strong>のため、C言語と疑似コード両方の読解練習を行う</td></tr>
+    <tr><td class="pri-high-text">最重要</td><td>論理回路 <span class="tag-up">v5.2拡張</span></td><td>論理回路入門（数理工学社）／JK-FF励起表・ミーリー機械（2025）・カルノー図・NAND変換・<strong>D-FFタイミングチャート</strong>（2018,2024 直列加算器）・<strong>不完全定義関数のドントケア項</strong>（2019,2025）・<strong>同期型カウンタの状態遷移表→論理式設計</strong>（2021）・<strong>標準和積形(POS)も標準積和形と並行で</strong>（2018）・<strong>ゲート数制限つき設計</strong>（2023:4個,2024:11個以下）。9年中8年で出題</td></tr>
+    <tr><td class="pri-high-text">最重要</td><td>データ構造 <span class="tag-new">v5新規</span></td><td>アルゴリズムとデータ構造（数理工学社）／<strong>スタック</strong>（2017,2023,2024）・キュー・二分木・ヒープ・ハッシュ表。特にスタックは近年連続出題のため、操作トレースと配列実装を完全習熟</td></tr>
+    <tr><td class="pri-high-text">最重要</td><td>確率・統計 <span class="tag-up">v5.2拡張</span></td><td>ませま確率統計（ベイズ・正規分布・期待値・分散）／χ²検定・回帰分析は2023年解答PDFで補完／<strong>確率論的方法（期待値による存在証明）</strong>は2021,2025で出題のため例題を確認／<strong>マルコフ連鎖と定常分布</strong>（2018 数直線上の遷移→A·p_t=p_{t+1}, lim p_t）／<strong>二項分布による仮説検定</strong>（2017 コイン10回投げ・両側/片側検定）／<strong>複合事象の確率</strong>（2023 サイコロ3つの和が11/12になる確率）</td></tr>
+    <tr><td class="pri-high-text">最重要</td><td>証明問題 <span class="tag-up">v5.2拡張</span></td><td>持参の離散数学テキスト第3章（論理・帰納法）・第2章（同値関係）を中心に記述練習。組合せ論的証明（2025）に対応するため鳩の巣原理・確率論的方法も含める／<strong>対偶（contraposition）による証明</strong>（2018 単射の対偶を示す）／<strong>平面グラフのオイラー公式の導出</strong>（2019 n−m+f=2 を辺追加で帰納的に）／<strong>K5が平面グラフでない証明</strong>（2019）／<strong>木の辺数 = 頂点数−1</strong>（2017）／<strong>帰納法による恒等式</strong>（2022 Γ(m+1)=m!）</td></tr>
+    <tr><td class="pri-high-text">最重要</td><td>離散数学（集合・写像） <span class="tag-up">v5.2拡張</span></td><td>持参の離散数学テキスト。集合・写像（単射・全射）・順序集合・ハッセ図・上界下界。9年中5年で出題のコア領域／<strong>同値関係と同値類</strong>（2020 mod 4, 2025 巡回シフト）— 反射律・対称律・推移律の確認と類別の手順／<strong>写像の数え上げ</strong>（2021 単射n!/(n-m)!・部分写像(n+1)^m・全射の包除原理計算）／<strong>合成写像と単射・全射の保存</strong>（2018 g∘fが全射ならgが全射）／<strong>べき集合・二項関係</strong>（2024 ℘(Ω)とハッセ図、約数関係）</td></tr>
+    <tr><td class="pri-mid-text">重要</td><td>ネットワーク <span class="tag-up">v5.2拡張</span></td><td>情報ネットワークの基礎 第2版（数理工学社）／<strong>サブネット計算</strong>（2020,2025連続出題）・CSMA/CD最小フレーム長計算・イーサネットスイッチ動作・ARP・OSI参照モデル・traceroute/TTL／<strong>HTTPS/TLS/Cookie/盗聴検知</strong>（2022 大問2問2の核心：URL各部の暗号化判定・PDU内のフィールド漏洩・セッション管理リクエスト/レスポンス）／<strong>TCPポート番号⇄プロトコル対応</strong>（25=SMTP, 80=HTTP, 443=HTTPS）／<strong>DNS/FQDN</strong>（2022 chiba-u.jp ⇔ 133.82.251.21）／<strong>Duplex通信</strong>（full/half/simplex 3種、2022）／<strong>経路表の最長一致マッチング</strong>（2021）</td></tr>
+    <tr><td class="pri-mid-text">重要</td><td>オートマトン <span class="tag-up">v5.2拡張</span></td><td>離散数学テキスト内のオートマトン章 ／ NFA→DFA変換（部分集合構成法）・状態遷移表・<strong>ミーリー機械</strong>（2025）・状態最小化を重点的に／<strong>受理する記号列集合の空/無限判定</strong>（2022 状態数nのオートマトンに長さn未満/長さn以上2n未満の列が受理されるか）／<strong>言語の補集合・共通部分・和集合の構成</strong>（2022 M3=L̄1, M4=L1∩L2, M5=L1∪L2の構成）／<strong>2つの言語の等価性判定</strong>（2022 (L1∩L̄2)∪(L̄1∩L2)が空かを判定）／<strong>非決定性の特徴語</strong>（ε動作・複数遷移）</td></tr>
+    <tr><td class="pri-mid-text">重要</td><td>アルゴリズム <span class="tag-up">v5.2追加拡張</span></td><td>アルゴリズムとデータ構造（数理工学社）／①ソート（選択・挿入・バブル・ヒープ）の比較・swap回数 ②<strong>動的計画法・メモ化</strong>（2024）③<strong>計算幾何</strong>（凸包・グラハムスキャン・符号付面積、2023）④<strong>文字列照合</strong>（Boyer-Moore風、2025）⑤<strong>再帰関数の呼び出し回数解析</strong>（2019 fib(6)、2024 check(0,18)）— 呼び出しツリーを紙に書く ⑥<strong>エラトステネスのふるい</strong>（2020 ループ最適化）⑦<strong>迷路探索 BFS/DFS</strong>（2017,2021 キューvsスタックの違い・実行結果の差）⑧<strong>整数演算の最適化</strong>（2022 加算反復→シフト+加算による乗算）</td></tr>
+    <tr><td class="pri-mid-text">重要</td><td>計算量（O記法） <span class="tag-up">v5格上げ</span></td><td>9年中4回出題（2018,2020,2024,2025）。再帰関数の計算量・ループの入れ子計算・空間計算量・<strong>比較回数とswap回数を n の式で表す練習</strong>（2018,2025）・<strong>メモリーセグメント（Text/Static/Heap/Stack）の理解</strong>（2024 再帰でのStack overflow）。アルゴリズム学習と一体で対策</td></tr>
+    <tr><td class="pri-mid-text">重要</td><td>代数系 <span class="tag-up">v5.2拡張</span></td><td>群・体（GF(2)）・原始元・rank・既約多項式（2018,2020,2022 で3回出題）。Z*p群の構造、有限体上の線形代数を重点的に／<strong>逆元の計算</strong>（2018 Z*7の各要素の逆元）・<strong>部分群の判定</strong>（2018 法7のかけ算で群となる部分集合）・<strong>結合行列とrank</strong>（2022 Oddtown問題：m×n結合行列のrankからm≦nを導く）</td></tr>
+    <tr><td class="pri-mid-text">重要</td><td>グラフ理論</td><td>持参の離散数学テキスト第5章。平面グラフ・オイラー公式・木の性質（葉次数・辺数）の証明問題に対応</td></tr>
+    <tr><td class="pri-mid-text">重要</td><td>解析系（大問1） <span class="tag-new">v5.2新規独立化</span></td><td><strong>2022,2023,2024 と3年連続で大問1に登場</strong>のため独立項目化。①<strong>部分積分・テーラー展開・スターリング近似</strong>（2022 Γ(m)→√(2πm)(m/e)^m の導出）②<strong>偏微分・最小二乗法・回帰分析</strong>（2023 ∂E/∂a=0, ∂E/∂b=0 の連立、相関係数R）③<strong>フーリエ変換</strong>（2024 定義・畳み込み定理・ガウシアンFT・<strong>極座標変換による2重積分</strong>）④<strong>多項式回帰</strong>（2023 m+1元連立一次方程式 S_jとT_kの導出）。大学2年解析学レベルの教科書で対応可</td></tr>
+    <tr><td>補完</td><td>微分方程式</td><td>2020年解答PDFのみ。1階・2階ODEを2〜3回解いて終わり。参考書不要</td></tr>
+    <tr><td>補完</td><td>アーキテクチャ</td><td>コンピュータアーキテクチャ（数理工学社）／CPI計算・キャッシュ・分岐予測器。2017,2020,2022 で出題</td></tr>
+    <tr><td>補完</td><td>数値表現</td><td>2023年大問2問1で大問1つ分の出題。1の補数・2の補数・IEEE 754浮動小数。2023年解答PDFで1日確認</td></tr>
+    <tr><td>補完</td><td>整数論</td><td>2017年で出題（GCD・拡張ユークリッド・合同方程式）。基本情報レベルで対応可</td></tr>
+  </table>
+
+  <!-- 勉強計画本体 -->
+  <div class="section-title">週別勉強計画（実日付カレンダーベース）</div>
+
+  <div class="tip-warn" style="margin-bottom:12px;">
+    <strong>毎日固定枠（v5.3拡張）：1.5〜2時間／日（全期間）</strong>。<br>
+    <strong>① 5/2〜5/21：競プロ参考書 必修30セクション × 2周（1日3セクション）</strong> ← 新規<br>
+    <strong>② 5/22以降：過去問大問3 写経 → 穴埋め → 動作トレース → 計算量解析</strong><br>
+    必修30セクション = 1章全節(8) + 3.1(1) + 4.0〜4.4(5) + 5.1〜5.6(6) + 8.0〜8.3,8.6(5) + 9.0〜9.3,コラム5(5)。<br>
+    実装で終わらせず<strong>動作トレース（配列状態変化・再帰呼び出しツリー・スタック/キュー中身）を紙で書く</strong>。<strong>呼び出し回数・比較回数・swap回数を n の式で表す</strong>練習・<strong>再帰↔反復の書き換え</strong>も練習。9年間の出題はすべて「既存コード読解＋穴埋め」形式で、ゼロからの実装問題は1問もないことに注意。この枠は以下の時間配分に含まない。
+  </div>
+
+  <!-- Phase 1 -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="badge b-purple">〜4/27（今週末）</span>
+      <div>
+        <div class="phase-title">論理回路 2周完了（JK-FF強化）＋ 微分方程式 1周のみ ✅ 完了見込み</div>
+        <div class="phase-sub">今週中に完了予定。来週からネットワーク・確率統計へ。</div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">4/21〜4/27</div>
+      <div class="week-content">
+        <span class="book-tag tag-coral">論理回路<span class="round-tag rdone">2周完了</span></span>
+        <span class="book-tag tag-orange">微分方程式<span class="round-tag rdone">1周完了</span></span>
+        <div class="week-detail">論理回路は真理値表→カルノー図→NAND変換・JK-FF励起表・ミーリー機械まで完了。微分方程式は2020年解答PDFで1階・2階ODEを自力で解けるか確認して終了。</div>
+      </div>
+    </div>
+    <div class="tip">今週末ゴール：論理回路（JK-FF含む）2周完了 ／ 微分方程式 1周完了・終了 ／ <strong>競プロ本（1日3セクション）開始</strong></div>
+  </div>
+
+  <!-- Phase 2 -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="badge b-teal">4/28〜5/11（2週間）</span>
+      <div>
+        <div class="phase-title">ネットワーク ＋ 確率統計（必要範囲のみ・並行学習）</div>
+        <div class="phase-sub">v5.1: ネットワーク必要章を 第2,5,7,8,9 に絞り3週→2週に圧縮。確率統計は維持。</div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">4/28〜5/4</div>
+      <div class="week-content">
+        <span class="book-tag tag-blue">ネットワーク<span class="round-tag r1">必要章 通読</span></span>
+        <span class="book-tag tag-green">確率統計<span class="round-tag r1">1周目</span></span>
+        <div class="week-detail">ネットワークは<strong>必要章のみ</strong>通読：第2章OSI/TCP-IP・第5章MAC(CSMA/CD)・第7章ルーティング・第8章IPv4/TCP/HTTP・第9.3章TLS。第1,3,4,6,10章および付録は<strong>スキップ</strong>。確率統計は期待値・分散・ベイズ定理・正規分布を通読。</div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">5/5〜5/11</div>
+      <div class="week-content">
+        <span class="book-tag tag-blue">ネットワーク<span class="round-tag r2">演習</span></span>
+        <span class="book-tag tag-green">確率統計<span class="round-tag r2">演習</span></span>
+        <span class="book-tag tag-gray">過去問 2022年<span class="round-tag r1">週末トライアル</span></span>
+        <div class="week-detail">ネットワーク演習：<strong>サブネット計算・CSMA/CD最小フレーム長計算・経路表マッチング・TCPポート番号</strong>を手で繰り返し解く。確率統計はχ²検定・回帰分析（2023年解答PDFで補完）まで完了させ、ベイズ定理を計算練習。5/11（日）に2022年過去問を2時間で解いて弱点記録（2023年は特殊構成のため標準的な2022年を選択）。</div>
+      </div>
+    </div>
+    <div class="time-box">
+      <div class="time-title">1日配分（5時間）</div>
+      <div class="time-row-d"><span class="time-label">ネットワーク（必要章のみ）</span><div class="time-bar-bg"><div class="time-bar" style="width:40%;background:#5090d0;"></div></div><span class="time-val">2h</span></div>
+      <div class="time-row-d"><span class="time-label">確率統計（χ²検定・回帰分析含む）</span><div class="time-bar-bg"><div class="time-bar" style="width:30%;background:#60b050;"></div></div><span class="time-val">1.5h</span></div>
+      <div class="time-row-d"><span class="time-label">既習科目 維持</span><div class="time-bar-bg"><div class="time-bar" style="width:20%;background:#888882;"></div></div><span class="time-val">1h</span></div>
+      <div class="time-row-d"><span class="time-label">口頭試問 研究計画</span><div class="time-bar-bg"><div class="time-bar" style="width:10%;background:#c8a030;"></div></div><span class="time-val">0.5h</span></div>
+    </div>
+    <div class="tip">5/11ゴール：ネットワーク必要章・確率統計 完了 ／ 過去問トライアル（2022年）・弱点リスト作成 ／ <strong>競プロ本 1周目完了（30セクション、5/2〜5/11の10日間）</strong></div>
+  </div>
+
+  <!-- Phase 3 -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="badge b-teal">5/12〜5/18（1週間）</span>
+      <div>
+        <div class="phase-title">オートマトン ＋ アーキテクチャ（ピンポイント学習）</div>
+        <div class="phase-sub">v5.1: オートマトンは第2章中心、アーキテクチャは1.1+5.1のみで2週→1週に圧縮</div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">5/12〜5/15</div>
+      <div class="week-content">
+        <span class="book-tag tag-purple">オートマトン<span class="round-tag r1">第2章中心 1周</span></span>
+        <div class="week-detail">第2章2.1〜2.7（NFA→DFA変換まで）+ 2.10（状態最小化）+ 第3章3.5,3.6（正規言語の演算と等価性判定）。<strong>第1章（チョムスキー階層）・第4,5,6章は完全スキップ</strong>。<strong>ミーリー機械</strong>は第2章で扱われていなければ論理回路入門の順序回路章で補完。状態遷移図と状態遷移表の両方を書けるように。</div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">5/16〜5/18</div>
+      <div class="week-content">
+        <span class="book-tag tag-amber">アーキテクチャ<span class="round-tag r1">必要節のみ</span></span>
+        <span class="book-tag tag-purple">オートマトン<span class="round-tag r2">演習</span></span>
+        <span class="book-tag tag-gray">弱点補強</span>
+        <div class="week-detail">アーキテクチャは<strong>1.1（数値表現・IEEE 754半精度）+ 5.1（キャッシュ）+ 2.1のCPI公式のみ</strong>。第3,4章MIPSアセンブリは完全スキップ。オートマトンは部分集合構成法・状態最小化を手で計算演習。5/11トライアルで発覚した弱点も補強。</div>
+      </div>
+    </div>
+    <div class="time-box">
+      <div class="time-title">1日配分（5時間）</div>
+      <div class="time-row-d"><span class="time-label">オートマトン（ミーリー機械含む）</span><div class="time-bar-bg"><div class="time-bar" style="width:40%;background:#9080e0;"></div></div><span class="time-val">2h</span></div>
+      <div class="time-row-d"><span class="time-label">アーキテクチャ・弱点補強</span><div class="time-bar-bg"><div class="time-bar" style="width:30%;background:#c8a030;"></div></div><span class="time-val">1.5h</span></div>
+      <div class="time-row-d"><span class="time-label">既習科目 維持</span><div class="time-bar-bg"><div class="time-bar" style="width:20%;background:#888882;"></div></div><span class="time-val">1h</span></div>
+      <div class="time-row-d"><span class="time-label">口頭試問 研究計画</span><div class="time-bar-bg"><div class="time-bar" style="width:10%;background:#c8a030;"></div></div><span class="time-val">0.5h</span></div>
+    </div>
+    <div class="tip">5/18ゴール：全主要科目インプット完了 ／ オートマトン・キャッシュ・IEEE 754 習熟 ／ <strong>競プロ本 2周目（5/12〜5/21）並行進行中</strong> ／ 翌週から過去問本格演習</div>
+  </div>
+
+  <!-- Phase 4 -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="badge b-coral">5/19〜6/14（4週間）</span>
+      <div>
+        <div class="phase-title">過去問 本格演習（2017〜2025年）＋ 出願準備</div>
+        <div class="phase-sub">v5.1: 6/2→5/19に2週間前倒し。直近3年を2回演習可能に。<strong>v5.4: 出願受付 6/16〜6/18（必着）に1日前倒し</strong></div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">5/19〜5/25</div>
+      <div class="week-content">
+        <span class="book-tag tag-gray">過去問 2025年・2024年（1回目）★最優先</span>
+        <span class="book-tag tag-purple">競プロ本 2周目仕上げ（〜5/21）</span>
+        <div class="week-detail"><strong>直近2年を最優先</strong>で本番形式（2時間厳守）。最新傾向（メモ化DP・文字列照合・ミーリー機械・確率論的方法・フーリエ変換）への対応力を確認。間違えた問題は参考書に戻って確認・記録。各年の翌日に答え合わせと弱点抽出。<br><strong>5/21に競プロ本 必修30セクション×2周完了</strong>。5/22以降は固定枠を「過去問大問3 写経＋動作トレース」にシフト。</div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">5/26〜6/1</div>
+      <div class="week-content">
+        <span class="book-tag tag-gray">過去問 2023年・2021年・2020年</span>
+        <div class="week-detail">2023年は<strong>特殊構成</strong>（回帰分析・凸包・IEEE 754）のため解答PDFと併せて確認。2021年は確率論的方法による存在証明・NFA→DFA。2020年は集合論・GF(2)・サブネット計算・カッコーハッシング。各年2時間の本番形式で解く。</div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">6/2〜6/8</div>
+      <div class="week-content">
+        <span class="book-tag tag-gray">過去問 2019年・2018年・2017年</span>
+        <span class="book-tag tag-amber">出願書類 準備開始</span>
+        <div class="week-detail">古い年度を消化。2019年は平面グラフ・ベイズ推定・OSI層分類。2018年は写像合成・群論・順序キュー。2017年は整数論・分岐予測器・迷路探索。出願書類の収集を開始。</div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">6/9〜6/14</div>
+      <div class="week-content">
+        <span class="book-tag tag-gray">過去問 2025・2024・2023（2回目）★最重要</span>
+        <span class="book-tag tag-amber">出願書類 6/14完了目標</span>
+        <span class="book-tag tag-amber">口頭試問 練習 毎日1回</span>
+        <div class="week-detail"><strong>直近3年を2回目演習</strong>。最新傾向に最も近い年度なので2回解いて感覚を体得。1回目で間違えた問題が解けるようになっているか確認。<strong>出願書類は6/14（日）には全部揃えて最終確認（提出締切の2日前）</strong>。口頭試問は毎日1回：志望理由・研究計画・卒業研究を3分で話せるように。</div>
+      </div>
+    </div>
+    <div class="tip-danger">出願受付は <strong>6/16（火）〜6/18（木）必着</strong>。6/14には全書類を揃えて確認を完了させること。検定料払込締切も <strong>6/18（木）</strong>。</div>
+    <div style="margin-top:12px;">
+      <div class="time-title" style="margin-bottom:8px;">過去問 進捗チェック（v5.1で2週間前倒し）</div>
+      <div class="exam-grid">
+        <div class="exam-card"><div class="exam-year">2025年 ★★最優先</div><div class="exam-status">5/19〜5/25（1回目）+ 6/9〜6/15（2回目）</div></div>
+        <div class="exam-card"><div class="exam-year">2024年 ★★最優先</div><div class="exam-status">5/19〜5/25（1回目）+ 6/9〜6/15（2回目）</div></div>
+        <div class="exam-card"><div class="exam-year">2023年 ★最優先</div><div class="exam-status">5/26〜6/1（1回目）+ 6/9〜6/15（2回目）</div></div>
+        <div class="exam-card"><div class="exam-year">2022年</div><div class="exam-status">5/11 トライアル済</div></div>
+        <div class="exam-card"><div class="exam-year">2021年</div><div class="exam-status">5/26〜6/1</div></div>
+        <div class="exam-card"><div class="exam-year">2020年</div><div class="exam-status">5/26〜6/1</div></div>
+        <div class="exam-card"><div class="exam-year">2019年</div><div class="exam-status">6/2〜6/8</div></div>
+        <div class="exam-card"><div class="exam-year">2018年</div><div class="exam-status">6/2〜6/8</div></div>
+        <div class="exam-card"><div class="exam-year">2017年</div><div class="exam-status">6/2〜6/8</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 5 -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="badge b-coral">6/15〜7/18（5週間）</span>
+      <div>
+        <div class="phase-title">弱点の最終補強 ＋ 口頭試問対策 最優先</div>
+        <div class="phase-sub">v5.4: 過去問が6/14時点で9年分+直近3年2回目まで完了済み。口頭試問は7/18（土）。</div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">6/15〜6/21</div>
+      <div class="week-content">
+        <span class="book-tag tag-amber">★出願（6/16-18）</span>
+        <span class="book-tag tag-gray">過去問 弱点問題 再演習</span>
+        <span class="book-tag tag-amber">口頭試問 模擬練習 毎日</span>
+        <div class="week-detail"><strong>6/16（火）〜6/18（木）出願受付（必着）</strong>。9年分の過去問で繰り返し間違えた問題を集中再演習。口頭試問は毎日1回模擬練習。専門知識の想定問答集（ネットワーク・論理回路・オートマトン・データ構造・アルゴリズム）を作成し繰り返し練習。</div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">6/22〜7/5</div>
+      <div class="week-content">
+        <span class="book-tag tag-amber">口頭試問 最優先</span>
+        <span class="book-tag tag-gray">過去問 維持</span>
+        <div class="week-detail">研究計画・志望理由・卒業研究の3分プレゼンを完成形にする。専門知識の想定問答集を仕上げる。<strong>情報科学コースは口頭試問が全員必須・受験しないと失格</strong>のため最重要。</div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">7/6〜7/17</div>
+      <div class="week-content">
+        <span class="book-tag tag-amber">口頭試問 仕上げ</span>
+        <div class="week-detail">毎日1回模擬練習。<strong>7/17（金）10時に工学部掲示板で注意事項を確認</strong>。</div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">7/18（土）</div>
+      <div class="week-content">
+        <span class="book-tag tag-amber">★口頭試問 本番（10:00〜）</span>
+        <div class="week-detail">全員受験必須。やむを得ない理由以外で集合時間に遅れた場合も失格。希望教育研究領域の志望理由・卒業研究内容・大学院での研究計画・修了後の予定について質疑応答。知らない専門知識は「わかりません」と正直に答えてOK。受験票・筆記用具を必ず持参。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 6 -->
+  <div class="phase">
+    <div class="phase-header">
+      <span class="badge b-blue">7/20〜8/6（2.5週間）</span>
+      <div>
+        <div class="phase-title">直前仕上げ → 学力検査 本番</div>
+        <div class="phase-sub">v5.4: 学力検査が8/5→8/6に1日延長。新規インプット禁止。復習のみ。</div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">7/20〜8/2</div>
+      <div class="week-content">
+        <span class="book-tag tag-gray">全科目 最終復習</span>
+        <div class="week-detail">過去問の解き直しと間違えた問題の確認のみ。最重要6項目（C言語/疑似コード・論理回路・データ構造・確率統計・証明問題・離散数学）を優先的に復習。新しいインプットは一切しない。</div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">8/3〜8/5</div>
+      <div class="week-content">
+        <span class="book-tag tag-gray">軽い復習のみ</span>
+        <div class="week-detail">体調管理最優先。<strong>8/5（水）10時に工学部掲示板で学力検査の注意事項を確認</strong>。8/5は早めに就寝。持ち物確認（受験票・鉛筆・シャープペンシル・消しゴム・ボールペン黒/青/ブルーブラック・携帯用鉛筆削り非電動・時計計時機能のみ）。</div>
+      </div>
+    </div>
+    <div class="week-row">
+      <div class="week-label">8/6（木）</div>
+      <div class="week-content">
+        <span class="book-tag tag-coral">★学力検査 本番</span>
+        <div class="week-detail">専門科目（10:00〜12:00）。千葉大学西千葉キャンパス。受験票を必ず持参。最寄り駅周辺で合否電報の勧誘や物品販売をしている業者は本学とは無関係なので注意。</div>
+      </div>
+    </div>
+    <div class="tip">試験1週間前からは復習のみ。新しいことを詰め込むのは逆効果。8/31（月）14時に合格発表（融合理工学府HP）。</div>
+  </div>
+
+  <!-- 出願書類チェックリスト -->
+  <div class="section-title">出願書類チェックリスト（情報科学コース）</div>
+  <div class="phase">
+    <ul class="checklist">
+      <li>入学願書（様式A1：2027年4月入学用・募集要項とじ込み）</li>
+      <li>写真票・受験票（様式A2・切り離さない）</li>
+      <li>成績証明書（出身大学長または学部長作成・原本）</li>
+      <li>卒業（修了）見込証明書（出身大学長または学部長作成）</li>
+      <li>TOEIC L&R デジタル公式認定証（A4印刷）または TOEFL-iBT スコアレポート ※工学系は<strong>オンライン版TOEFL-iBT不可</strong></li>
+      <li>検定料 30,000円 収納証明書（E-支払いサービス利用後 入学願書A1に貼付）</li>
+      <li>写真3枚（縦4cm×横3cm・3か月以内撮影・上半身正面・脱帽）</li>
+      <li>返信用封筒2枚（受験票送付用：110円切手貼付 / 合格通知書送付用：切手不要・宛先明記）</li>
+      <li>★面接・口頭試問結果通知用封筒（110円切手貼付・<strong>情報科学コースは全員提出</strong>）</li>
+      <li>住所シール（所定様式）</li>
+    </ul>
+    <div class="warn">⚠️ 情報科学コースで <strong>不要</strong> な書類：推薦書（高専推薦のみ）／志望理由書（機械工学のみ）／履歴書・住民票（外国人のみ）</div>
+    <div class="warn">⚠️ 書類に不備があると受理不可・一度受理した書類は返却不可。6/14には全書類を揃えること（提出締切は <strong>6/16〜6/18</strong>）。</div>
+    <div class="tip-danger">⚠️ 出願前に <strong>志望指導教員にメール連絡し、教育研究内容について確認</strong>すること（募集要項明記）。事前了承を得ずに出願すると不受理。第3志望まで指導教員を記入可能。</div>
+  </div>
+
+  <!-- 重要日程 -->
+  <div class="section-title">重要日程まとめ</div>
+  <div class="phase">
+    <table class="schedule-table">
+      <tr><th>日付</th><th>イベント</th></tr>
+      <tr class="milestone"><td>5月中（最優先）</td><td>★志望指導教員にメール連絡・教育研究内容を確認 / TOEIC・TOEFL有効期限確認（2024/6〜2026/5末）</td></tr>
+      <tr><td>〜4/27（日）</td><td>論理回路（JK-FF含む）2周・微分方程式1周 完了</td></tr>
+      <tr><td>4/28（月）</td><td>ネットワーク（必要章のみ）・確率統計 開始</td></tr>
+      <tr class="milestone"><td>5/2（土）〜5/21（水）</td><td>★競プロ本 必修30セクション×2周（1日3セクション・1.5〜2h/日）</td></tr>
+      <tr><td>5/11（日）</td><td>過去問トライアル（2022年）→ 弱点リスト作成 / ネットワーク・確率統計 完了</td></tr>
+      <tr><td>5/12（月）</td><td>オートマトン（第2章中心）・アーキテクチャ（1.1+5.1）開始</td></tr>
+      <tr><td>5/18（日）</td><td>全主要科目 インプット完了</td></tr>
+      <tr class="milestone"><td>5/19（月）</td><td>★過去問 本格演習 開始 — 2025・2024 から</td></tr>
+      <tr><td>5/26（月）</td><td>過去問 2023・2021・2020 演習</td></tr>
+      <tr><td>6/1（月）</td><td>検定料払込開始（6/1〜6/18）</td></tr>
+      <tr><td>6/2（火）</td><td>過去問 2019・2018・2017 演習 / 出願書類 準備開始</td></tr>
+      <tr><td>6/9（火）</td><td>過去問 直近3年（2025・2024・2023）2回目演習</td></tr>
+      <tr><td>6/14（日）</td><td>出願書類 全部揃える（締切2日前） / 過去問9年分 完了</td></tr>
+      <tr class="milestone"><td>6/16（火）〜6/18（木）</td><td>★出願受付（必着・9〜17時・工学系総合研究棟2 2階）</td></tr>
+      <tr><td>6/18（木）</td><td>検定料払込締切</td></tr>
+      <tr><td>6/15（月）</td><td>弱点補強・口頭試問対策 本格化</td></tr>
+      <tr><td>7/17（金）10時</td><td>口頭試問の注意事項 工学部掲示板に掲示</td></tr>
+      <tr class="milestone"><td>7/18（土）10:00〜</td><td>★口頭試問 本番（情報科学コースは全員必須・受験しないと失格）</td></tr>
+      <tr><td>7/27（月）まで</td><td>口頭試問結果通知 発送（到着日ではない）</td></tr>
+      <tr><td>7/20（月）</td><td>直前仕上げ 開始</td></tr>
+      <tr><td>8/5（水）10時</td><td>学力検査の注意事項 工学部掲示板に掲示</td></tr>
+      <tr class="milestone"><td>8/6（木）10:00〜12:00</td><td>★学力検査 本番（西千葉キャンパス・専門科目）</td></tr>
+      <tr class="milestone"><td>8/31（月）14時</td><td>合格者発表（融合理工学府HP）</td></tr>
+      <tr><td>2027/3/10〜3/17</td><td>WEB入学手続（入学料282,000円・授業料前期分321,480円）</td></tr>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>
